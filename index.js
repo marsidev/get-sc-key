@@ -44,6 +44,8 @@ app.post('/', async (req, res) => {
 
     // get current keys:
     const savedKeys = await getKeys({ baseUrl, cookie })
+    console.log('savedKeys: %s', savedKeys.length)
+    console.log(savedKeys.map(k => k.name))
 
     // get current IP
     const ip = await getIP()

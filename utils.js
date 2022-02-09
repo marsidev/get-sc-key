@@ -28,6 +28,7 @@ const revokeKey = async ({ baseUrl, cookie, keyToRevoke }) => {
     const headers = { cookie }
     const data = { id: keyToRevoke.id }
     await axios.post(url, data, { headers })
+    console.log(`key ${keyToRevoke.name} revoked!`)
   } catch (error) {
     return error.response.data
   }
