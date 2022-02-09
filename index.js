@@ -6,7 +6,9 @@ const { login, getKeys, revokeKeys, createKey, getCookie, getIP } = require('./u
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(morgan('dev'))
+morgan.token('body', req => JSON.stringify(req.body))
+// app.use(morgan('dev'))
+app.use(morgan(':method - :body - :status - :response-time ms'))
 
 app.post('/', async (req, res) => {
   try {

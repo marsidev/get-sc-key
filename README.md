@@ -6,7 +6,7 @@ This is an API to generate a fresh API key for Supercell games for your current 
 
 Those API's has a limitation of **one API key per IP** and a maximum of 10 API keys per user. This is fine if you are using a single IP, but if you are using multiple IPs, you will need to generate a new API key for each IP.
 
-# How to use it?
+## How to use it?
 
 You can use this API by making a POST request to the following URL `https://get-sc-key.herokuapp.com` adding in the body your user credentials and the game id you want to generate a key for. Example:
 ```json
@@ -29,7 +29,7 @@ Then you will receive a JSON response like this:
 ```
     Supported game IDs: clashroyale, clashofclans, brawlstars, cr, coc, bs
 
-# How it works?
+## How it works?
 
 This API login into the game developer portal with your credentials, check if exists a key for your IP and if not, **delete all existing keys** and generate a new one for your IP. Otherwise, it will return the existing key. The logic is inspired on [TheLearneer/supercell-api](https://github.com/TheLearneer/supercell-api)
 
