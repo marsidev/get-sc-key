@@ -6,14 +6,12 @@ const { login, getKeys, revokeKey, createKey, getCookie, getIP } = require('./ut
 const app = express()
 app.use(cors())
 app.use(express.json())
-morgan.token('body', req => JSON.stringify(req.body))
 app.use(morgan('dev'))
-// app.use(morgan(':method - :body - :status - :response-time ms'))
 
 app.post('/', async (req, res) => {
   try {
     let { game } = req.body
-    const { email, password } = req.body
+    const { email, password, whitelist = [] } = req.body
 
     if (!email || !password) {
       return res.status(400).json({ error: 'email and password are required' })
@@ -35,7 +33,7 @@ app.post('/', async (req, res) => {
 
     // login
     const loginResponse = await login({ baseUrl, email, password })
-    if (loginResponse.error) {
+    if (loginResponse?.error) {
       return res.status(401).send(loginResponse)
     }
 
@@ -44,8 +42,6 @@ app.post('/', async (req, res) => {
 
     // get current keys:
     const savedKeys = await getKeys({ baseUrl, cookie })
-    console.log('savedKeys: %s', savedKeys.length)
-    console.log(savedKeys.map(k => k.name))
 
     // get current IP
     const ip = await getIP()
@@ -57,20 +53,18 @@ app.post('/', async (req, res) => {
     if (keyWithSameIP) {
       validApiKey = keyWithSameIP
     } else {
-      // get keys which are not for this IP
-      // const keysToRevoke = savedKeys.filter(key => !key.cidrRanges.includes(ip))
-
-      // revoke last key if there is 10 keys
+      // revoke the first key which is not whitelisted
       if (savedKeys.length === 10) {
-        const keyToRevoke = savedKeys[savedKeys.length - 1]
+        const keyToRevoke = savedKeys.find(key => !whitelist.includes(key.name))
         await revokeKey({ baseUrl, cookie, keyToRevoke })
       }
 
-      // revoke all keys which are not for this IP
-      // await revokeKeys({ baseUrl, cookie, keysToRevoke })
-
       // create new key
       const newKey = await createKey({ baseUrl, cookie, ip })
+      if (newKey?.error) {
+        return res.status(500).send(newKey)
+      }
+
       validApiKey = newKey.key
     }
 
