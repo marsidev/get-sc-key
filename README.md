@@ -8,7 +8,7 @@ Those API's has a limitation of **one API key per IP** and a maximum of 10 API k
 
 # How to use it?
 
-You can use this API by making a POST request to the following URL `http://localhost:1234` adding in the body your user credentials and the game id you want to generate a key for. Example:
+You can use this API by making a POST request to the following URL `https://get-sc-key.herokuapp.com` adding in the body your user credentials and the game id you want to generate a key for. Example:
 ```json
 {
   "game": "clashroyale",
