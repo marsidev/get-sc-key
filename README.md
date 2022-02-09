@@ -31,7 +31,20 @@ Then you will receive a JSON response like this:
 
 ## How it works?
 
-This API login into the game developer portal with your credentials, check if exists a key for your IP and if not, **delete all existing keys** and generate a new one for your IP. Otherwise, it will return the existing key. The logic is inspired on [TheLearneer/supercell-api](https://github.com/TheLearneer/supercell-api)
+This API login into the game developer portal with your credentials, check if exists a key for your IP and if not, **delete the first key** and generate a new one for your IP. Otherwise, it will return the existing key. The logic is inspired on [TheLearneer/supercell-api](https://github.com/TheLearneer/supercell-api). 
+
+You can send a whitelist array of API key-names to avoid deleting them. Example:
+```json
+{
+  "game": "clashroyale",
+  "email": "yourmail",
+  "password": "yourpassword",
+  "whitelist": [
+    "important-key-1",
+    "important-key-2"
+  ]
+}
+```
 
 ## Contributing
 
