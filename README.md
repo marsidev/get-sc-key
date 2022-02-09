@@ -32,3 +32,7 @@ Then you will receive a JSON response like this:
 # How it works?
 
 This API login into the game developer portal with your credentials, check if exists a key for your IP and if not, **delete all existing keys** and generate a new one for your IP. Otherwise, it will return the existing key. The logic is inspired on [TheLearneer/supercell-api](https://github.com/TheLearneer/supercell-api)
+
+## Contributing
+
+Any contributions you make are greatly appreciated. If you have a suggestion that would make this better, please fork the repo and create a Pull Request. You can also simply [open an issue](https://github.com/marsigliadev/get-sc-key/issues/new).
