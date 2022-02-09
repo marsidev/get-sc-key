@@ -1,14 +1,14 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-const { login, getKeys, revokeKeys, createKey, getCookie, getIP } = require('./utils')
+const { login, getKeys, revokeKey, createKey, getCookie, getIP } = require('./utils')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 morgan.token('body', req => JSON.stringify(req.body))
-// app.use(morgan('dev'))
-app.use(morgan(':method - :body - :status - :response-time ms'))
+app.use(morgan('dev'))
+// app.use(morgan(':method - :body - :status - :response-time ms'))
 
 app.post('/', async (req, res) => {
   try {
@@ -56,10 +56,16 @@ app.post('/', async (req, res) => {
       validApiKey = keyWithSameIP
     } else {
       // get keys which are not for this IP
-      const keysToRevoke = savedKeys.filter(key => !key.cidrRanges.includes(ip))
+      // const keysToRevoke = savedKeys.filter(key => !key.cidrRanges.includes(ip))
+
+      // revoke last key if there is 10 keys
+      if (savedKeys.length === 10) {
+        const keyToRevoke = savedKeys[savedKeys.length - 1]
+        await revokeKey({ baseUrl, cookie, keyToRevoke })
+      }
 
       // revoke all keys which are not for this IP
-      await revokeKeys({ baseUrl, cookie, keysToRevoke })
+      // await revokeKeys({ baseUrl, cookie, keysToRevoke })
 
       // create new key
       const newKey = await createKey({ baseUrl, cookie, ip })
