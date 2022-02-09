@@ -7,7 +7,7 @@ const login = async ({ baseUrl, email, password }) => {
     const login = await axios.post(url, payload)
     return login
   } catch (error) {
-    return error.response.data
+    return error?.response?.data
   }
 }
 
@@ -18,7 +18,7 @@ const getKeys = async ({ baseUrl, cookie }) => {
     const response = await axios.post(url, {}, { headers })
     return response.data.keys
   } catch (error) {
-    return error.response.data
+    return error?.response?.data
   }
 }
 
@@ -28,9 +28,9 @@ const revokeKey = async ({ baseUrl, cookie, keyToRevoke }) => {
     const headers = { cookie }
     const data = { id: keyToRevoke.id }
     await axios.post(url, data, { headers })
-    console.log(`key ${keyToRevoke.name} revoked!`)
+    // console.log(`key "${keyToRevoke.name}" revoked!`)
   } catch (error) {
-    return error.response.data
+    return error?.response?.data
   }
 }
 
@@ -43,7 +43,7 @@ const revokeKeys = async ({ baseUrl, cookie, keysToRevoke }) => {
       await axios.post(url, data, { headers })
     })
   } catch (error) {
-    return error.response.data
+    return error?.response?.data
   }
 }
 
@@ -53,13 +53,13 @@ const createKey = async ({ baseUrl, cookie, ip }) => {
     const headers = { cookie }
     const payload = {
       cidrRanges: [ip],
-      name: 'Key generated at ' + new Date().toLocaleString(),
+      name: 'Key generated at ' + new Date().toISOString(),
       description: 'Key for non-commercial use'
     }
     const response = await axios.post(url, payload, { headers })
     return response.data
   } catch (error) {
-    return error.response.data
+    return error?.response?.data
   }
 }
 
