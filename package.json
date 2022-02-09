@@ -1,0 +1,35 @@
+{
+  "name": "get-sc-key",
+  "version": "1.0.0",
+  "description": "This is an API to generate a fresh API key for Supercell games for your current IP. It supports Clash Royale, Clash of Clans and Brawl Stars.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "git": "git add . && git commit -m",
+    "postgit": "git push origin main",
+    "heroku": "git push heroku main"
+  },
+  "keywords": [
+    "clash-royale",
+    "clash-of-clans",
+    "brawl-stars",
+    "supercell",
+    "api-key"
+  ],
+  "author": "Luis Marsiglia",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.25.0",
+    "cors": "2.8.5",
+    "express": "4.17.2",
+    "nodemon": "2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.2.0"
+  }
+}
