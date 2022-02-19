@@ -11,7 +11,7 @@ app.use(morgan('dev'))
 app.post('/', async (req, res) => {
   try {
     let { game } = req.body
-    const { email, password, whitelist = [] } = req.body
+    const { email, password, whitelist = [], fixedIp = '' } = req.body
 
     if (!email || !password) {
       return res.status(400).json({ error: 'email and password are required' })
@@ -44,7 +44,7 @@ app.post('/', async (req, res) => {
     const savedKeys = await getKeys({ baseUrl, cookie })
 
     // get current IP
-    const ip = await getIP()
+    const ip = fixedIp || await getIP()
 
     // check if exists a key with the same IP:
     const keyWithSameIP = savedKeys.find(key => key.cidrRanges.includes(ip))
@@ -60,7 +60,7 @@ app.post('/', async (req, res) => {
       }
 
       // create new key
-      const newKey = await createKey({ baseUrl, cookie, ip })
+      const newKey = await createKey({ baseUrl, cookie, ips: [ip] })
       if (newKey?.error) {
         return res.status(500).send(newKey)
       }

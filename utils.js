@@ -47,12 +47,12 @@ const revokeKeys = async ({ baseUrl, cookie, keysToRevoke }) => {
   }
 }
 
-const createKey = async ({ baseUrl, cookie, ip }) => {
+const createKey = async ({ baseUrl, cookie, ips }) => {
   try {
     const url = `${baseUrl}/apikey/create`
     const headers = { cookie }
     const payload = {
-      cidrRanges: [ip],
+      cidrRanges: ips,
       name: 'Key generated at ' + new Date().toISOString(),
       description: 'Key for non-commercial use'
     }
