@@ -18,7 +18,7 @@ app.post('/', async (req, res) => {
     }
 
     if (!game) {
-      return res.status(400).json({ error: 'game is required' })
+      return res.status(400).json({ error: 'game id is required' })
     }
 
     if (game === 'cr') game = 'clashroyale'
@@ -26,7 +26,7 @@ app.post('/', async (req, res) => {
     if (game === 'bs') game = 'brawlstars'
 
     if (game !== 'clashroyale' && game !== 'clashofclans' && game !== 'brawlstars') {
-      return res.status(400).json({ error: 'game must be either clashroyale, clashofclans or brawlstars' })
+      return res.status(400).json({ error: 'game id must be either "clashroyale", "clashofclans", "brawlstars", "cr", "coc" or "bs"' })
     }
 
     const baseUrl = `https://developer.${game}.com/api`
