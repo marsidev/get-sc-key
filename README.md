@@ -67,4 +67,4 @@ You can set a fixed IP to use instead of the current one. Example:
 
 ## Contributing
 
-Any contributions you make are greatly appreciated. If you have a suggestion that would make this better, please fork the repo and create a Pull Request. You can also simply [open an issue](https://github.com/marsigliadev/get-sc-key/issues/new).
+Any contributions you make are greatly appreciated. If you have a suggestion that would make this better, please fork the repo and create a Pull Request. You can also simply [open an issue](https://github.com/marsidev/get-sc-key/issues/new).
