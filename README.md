@@ -8,7 +8,7 @@ Those API's has a limitation of **one API key per IP** and a maximum of 10 API k
 
 ## How to use it?
 
-You can use this API by making a POST request to the following URL `https://get-sc-key-production.up.railway.app` adding in the body your user credentials and the game id you want to generate a key for. Example:
+You can use this API by making a POST request to the following URL `https://get-sc-key.vercel.app` adding in the body your user credentials and the game id you want to generate a key for. Example:
 ```json
 {
   "game": "clashroyale",
@@ -28,7 +28,6 @@ Then you will receive a JSON response like this:
 }
 ```
     Supported game IDs: clashroyale, clashofclans, brawlstars, cr, coc, bs
-    Mirror API URLs: https://get-sc-key.vercel.app, https://get-sc-key.herokuapp.com
 
 ## Run locally
 - `$ npm run install`
